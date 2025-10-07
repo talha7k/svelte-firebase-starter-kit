@@ -156,7 +156,7 @@ Code blocks are supported in markdown posts:
    let count = 0;
  </script>
 
- <button on:click={() => count++}>
+  <button onclick={() => count++}>
    Count is {count}
  </button>
 ```
