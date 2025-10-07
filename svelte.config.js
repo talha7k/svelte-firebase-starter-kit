@@ -7,27 +7,7 @@ const config = {
   extensions: [".svelte", ".md"],
   preprocess: [
     vitePreprocess(),
-    /** @type {any} */ (mdsvex)({
-      extensions: [".md"],
-      smartypants: false,
-      highlight: async (code, lang) => {
-        const { createHighlighter } = await import("shiki");
-        const hl = await createHighlighter({
-          themes: ["github-dark"],
-          langs: [
-            "javascript",
-            "typescript",
-            "svelte",
-            "bash",
-            "json",
-            "markdown",
-            "html",
-            "css",
-          ],
-        });
-        return hl.codeToHtml(code, { lang, theme: "github-dark" });
-      },
-    }),
+    mdsvex({ extensions: [".md"], smartypants: false, layout: false }),
   ],
 
   kit: {

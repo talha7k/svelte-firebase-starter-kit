@@ -1,7 +1,7 @@
 ---
 title: "Svelte Firekit: A Modern Blog-Enabled Firebase Starter Template"
-publishedAt: "2024-01-12"
-author: "Giovani Rodriguez"
+publishedAt: "2025-10-12"
+author: "Talha Khan"
 tags: ["svelte", "firebase", "typescript", "blog", "starter-template"]
 excerpt: "Discover how Svelte Firekit combines SvelteKit, Firebase, and TypeScript to create a powerful, blog-enabled starter template for modern web applications."
 categories: ["Product"]
