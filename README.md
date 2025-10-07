@@ -6,7 +6,7 @@ A comprehensive starter template for building full-stack Svelte applications wit
 
 - 🔥 Firebase Authentication
 - 📝 Blog system using MDsveX
-- ✨ Code highlighting with Shiki
+
 - 🎨 Styling with Shadcn/Svelte
 - 🛡️ Protected routes with auth guards
 - 📱 Responsive design
@@ -113,7 +113,7 @@ export const load: LayoutLoad = async ({ url }) => {
 
 ## Blog System
 
-The blog system uses MDsveX for Markdown processing and Shiki for code highlighting.
+The blog system uses MDsveX for Markdown processing.
 
 ### Creating a New Blog Post
 
@@ -147,18 +147,18 @@ The blog system uses MDsveX for Markdown processing and Shiki for code highlight
    Your content here...
    ```
 
-### Code Highlighting
+### Code Blocks
 
-Code blocks are automatically highlighted using Shiki:
+Code blocks are supported in markdown posts:
 
 ```svelte
-<script>
-  let count = 0;
-</script>
+ <script>
+   let count = 0;
+ </script>
 
-<button on:click={() => count++}>
-  Count is {count}
-</button>
+ <button on:click={() => count++}>
+   Count is {count}
+ </button>
 ```
 
 ## ShadcN Components

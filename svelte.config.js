@@ -7,7 +7,12 @@ const config = {
   extensions: [".svelte", ".md"],
   preprocess: [
     vitePreprocess(),
-    mdsvex({ extensions: [".md"], smartypants: false, layout: false }),
+    mdsvex({
+      extensions: [".md"],
+      smartypants: false,
+      layout: false,
+      highlight: false,
+    }),
   ],
 
   kit: {
