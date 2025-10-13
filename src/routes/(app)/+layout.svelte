@@ -11,8 +11,9 @@
     firekitDoc,
     firekitDocMutations,
   } from "svelte-firekit";
-  import { userProfile } from "$lib/stores/user";
-  import type { UserProfile } from "$lib/types/user";
+   import { userProfile } from "$lib/stores/user";
+   import { isSidebarOpen } from "$lib/stores/sidebar";
+   import type { UserProfile } from "$lib/types/user";
   let { children } = $props();
   const config: any = {
     geolocation: {
@@ -73,7 +74,7 @@
   });
 </script>
 
-<Sidebar.Provider>
+<Sidebar.Provider bind:open={$isSidebarOpen}>
   <AppSidebar variant="inset" />
   <Sidebar.Inset>
     <header

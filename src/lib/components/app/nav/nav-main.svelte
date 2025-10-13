@@ -3,6 +3,7 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import Icon from '@iconify/svelte';
 	import { appNavItems } from '../../../../config';
+	import { isSidebarOpen } from '$lib/stores/sidebar';
 </script>
 
 {#each appNavItems as mainItem (mainItem.title)}
@@ -38,7 +39,7 @@
 												<Sidebar.MenuSubItem>
 													<Sidebar.MenuSubButton>
 														{#snippet child({ props })}
-															<a href={subItem.url} {...props}>
+															<a href={subItem.url} {...props} onclick={() => isSidebarOpen.set(false)}>
 																<span>{subItem.title}</span>
 															</a>
 														{/snippet}
@@ -57,7 +58,7 @@
 					<Sidebar.MenuItem>
 						<Sidebar.MenuButton>
 							{#snippet child({ props })}
-								<a href={item.url} {...props}>
+								<a href={item.url} {...props} onclick={() => isSidebarOpen.set(false)}>
 									{#if item.icon}
 										<Icon icon={item.icon} />
 									{/if}
