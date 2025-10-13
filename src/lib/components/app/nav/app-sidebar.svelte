@@ -26,7 +26,7 @@
 						</a>
 					{/snippet}
 				</Sidebar.MenuButton>
-				<Sidebar.Trigger />
+				<Sidebar.Trigger class="group-data-[state=collapsed]:hidden" />
 			</Sidebar.MenuItem>
 		</Sidebar.Menu>
 	</Sidebar.Header>
