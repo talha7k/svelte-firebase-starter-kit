@@ -14,10 +14,10 @@
 <Sidebar.Root bind:ref {collapsible} {...restProps}>
 	<Sidebar.Header>
 		<Sidebar.Menu>
-			<Sidebar.MenuItem>
+			<Sidebar.MenuItem class="flex items-center">
 				<Sidebar.MenuButton
 					size="lg"
-					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex-grow"
 				>
 					{#snippet child({ props })}
 						<a href="/" class="cursor-pointer" {...props}>
@@ -26,6 +26,7 @@
 						</a>
 					{/snippet}
 				</Sidebar.MenuButton>
+				<Sidebar.Trigger />
 			</Sidebar.MenuItem>
 		</Sidebar.Menu>
 	</Sidebar.Header>
