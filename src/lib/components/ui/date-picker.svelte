@@ -1,5 +1,5 @@
-<script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
+ <script lang="ts">
+  import Icon from '@iconify/svelte';
   import {
     DateFormatter,
     type DateValue,
@@ -28,7 +28,7 @@
       !value && "text-muted-foreground",
     )}
   >
-    <CalendarIcon />
+    <Icon icon="lucide:calendar" />
     {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
   </Popover.Trigger>
   <Popover.Content bind:ref={contentRef} class="w-auto p-0">

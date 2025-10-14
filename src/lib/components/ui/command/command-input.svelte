@@ -1,6 +1,6 @@
-<script lang="ts">
+ <script lang="ts">
 	import { Command as CommandPrimitive } from "bits-ui";
-	import SearchIcon from "@lucide/svelte/icons/search";
+	import Icon from '@iconify/svelte';
 	import { cn } from "$lib/utils.js";
 
 	let {
@@ -12,7 +12,7 @@
 </script>
 
 <div class="flex h-9 items-center gap-2 border-b pl-3 pr-8" data-slot="command-input-wrapper">
-	<SearchIcon class="size-4 shrink-0 opacity-50" />
+	<Icon icon="lucide:search" class="size-4 shrink-0 opacity-50" />
 	<CommandPrimitive.Input
 		data-slot="command-input"
 		class={cn(

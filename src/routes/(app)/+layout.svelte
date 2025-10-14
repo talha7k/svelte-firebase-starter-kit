@@ -3,6 +3,8 @@
   import AppSidebar from "$lib/components/app/nav/app-sidebar.svelte";
   import AutoBreadcrumb from "$lib/components/shared/auto-breadcrumb.svelte";
   import DarkModeToggle from "$lib/components/shared/dark-mode-toggle.svelte";
+  import { NotificationBadge } from "$lib/components/app/notifications";
+  import MessagingBadge from "$lib/components/app/messaging/messaging-badge.svelte";
   import { Separator } from "$lib/components/ui/separator";
   import * as Sidebar from "$lib/components/ui/sidebar";
   import {
@@ -12,6 +14,8 @@
     firekitDocMutations,
   } from "svelte-firekit";
    import { userProfile } from "$lib/stores/user";
+   import { notificationActions } from "$lib/stores/notification";
+   import { messagingActions } from "$lib/stores/message";
    import { isSidebarOpen } from "$lib/stores/sidebar";
    import type { UserProfile } from "$lib/types/user";
   let { children } = $props();
@@ -62,6 +66,10 @@
             }
           },
         });
+
+        // Initialize notifications and messaging for the user
+        notificationActions.initialize(user.uid);
+        messagingActions.initialize(user.uid);
       });
     } else {
       userProfile.set({
@@ -86,6 +94,8 @@
         <AutoBreadcrumb />
       </div>
       <div class="flex items-center gap-2 px-4">
+        <NotificationBadge />
+        <MessagingBadge />
         <DarkModeToggle />
       </div>
     </header>

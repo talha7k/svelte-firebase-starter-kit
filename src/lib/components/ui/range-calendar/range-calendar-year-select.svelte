@@ -1,7 +1,7 @@
-<script lang="ts">
+ <script lang="ts">
 	import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
 	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
-	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
+	import Icon from '@iconify/svelte';
 
 	let {
 		ref = $bindable(null),
@@ -36,7 +36,7 @@
 				aria-hidden="true"
 			>
 				{yearItems.find((item) => item.value === value)?.label || selectedYearItem.label}
-				<ChevronDownIcon class="size-4" />
+				<Icon icon="lucide:chevron-down" class="size-4" />
 			</span>
 		{/snippet}
 	</RangeCalendarPrimitive.YearSelect>

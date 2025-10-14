@@ -3,9 +3,9 @@
 	import type { NotificationChannel } from '$lib/types/notification';
 
 	export const channels: NotificationChannel[] = [
-		{ id: 'email', icon: 'lucide:mail', label: 'Email' },
-		{ id: 'desktop', icon: 'lucide:monitor', label: 'Desktop', description: 'Push notification' },
-		{ id: 'mobile', icon: 'lucide:smartphone', label: 'Mobile', description: 'Push notification' }
+		{ id: 'email', icon: 'lucide:mail', name: 'Email', description: '', enabled: false, settings: {} },
+		{ id: 'desktop', icon: 'lucide:monitor', name: 'Desktop', description: 'Push notification', enabled: false, settings: {} },
+		{ id: 'mobile', icon: 'lucide:smartphone', name: 'Mobile', description: 'Push notification', enabled: false, settings: {} }
 	];
 </script>
 
@@ -17,7 +17,7 @@
 		{#each channels as channel}
 			<div class="flex flex-col items-center justify-center text-center">
 				<Icon icon={channel.icon} class="size-5" />
-				<span class="mt-2 text-sm font-medium">{channel.label}</span>
+				<span class="mt-2 text-sm font-medium">{channel.name}</span>
 				{#if channel.description}
 					<span class="text-xs text-muted-foreground">{channel.description}</span>
 				{/if}

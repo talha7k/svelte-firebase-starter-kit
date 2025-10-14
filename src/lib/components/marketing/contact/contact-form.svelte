@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contactSchema } from '$lib/schemas/contact';
+	import { contactSchema } from '$lib/schemas/user/contact';
 	import { Input } from '$lib/components/ui/input';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import * as Card from '$lib/components/ui/card';

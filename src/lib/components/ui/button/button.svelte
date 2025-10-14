@@ -38,6 +38,9 @@
 		WithElementRef<HTMLAnchorAttributes> & {
 			variant?: ButtonVariant;
 			size?: ButtonSize;
+			onclick?: (event: MouseEvent) => void;
+			onmouseenter?: (event: MouseEvent) => void;
+			onmouseleave?: (event: MouseEvent) => void;
 		};
 </script>
 

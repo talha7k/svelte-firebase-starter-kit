@@ -1,5 +1,5 @@
-<script lang="ts">
-	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+ <script lang="ts">
+	import Icon from '@iconify/svelte';
 	import { cn, type WithElementRef } from "$lib/utils.js";
 	import type { HTMLLiAttributes } from "svelte/elements";
 
@@ -22,6 +22,6 @@
 	{#if children}
 		{@render children?.()}
 	{:else}
-		<ChevronRightIcon />
+		<Icon icon="lucide:chevron-right" />
 	{/if}
 </li>

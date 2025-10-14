@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { firekitAuth } from 'svelte-firekit';
 	import { Input } from '../ui/input/index.js';
-	import { signUpSchema } from '../../schemas/sign-up.js';
+	import { signUpSchema } from '../../schemas/user/sign-up';
 	import { toast } from 'svelte-sonner';
 	import * as v from 'valibot';
 	import Button from '../ui/button/button.svelte';

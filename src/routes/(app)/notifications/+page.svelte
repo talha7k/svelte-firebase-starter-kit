@@ -1,8 +1,13 @@
 <script lang="ts">
+	import { NotificationList } from '$lib/components/app/notifications';
 	import DoNotDisturbSection from '$lib/components/app/notifications/do-not-disturb-section.svelte';
 	import NotificationChannel from '$lib/components/app/notifications/notification-channel.svelte';
 	import NotificationSection from '$lib/components/app/notifications/notification-section.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import { notificationActions } from '$lib/stores/notification';
+	import { toast } from 'svelte-sonner';
+	import Icon from '@iconify/svelte';
 
 	const generalSettings = [
 		{
@@ -50,28 +55,76 @@
 	let startTime = $state('17:00');
 	let endTime = $state('09:00');
 	let selectedDays = $state<string[]>([]);
+
+	function saveSettings() {
+		// In a real app, this would save to the backend
+		toast.success('Notification settings saved');
+	}
+
+	function testNotification() {
+		notificationActions.add({
+			userId: 'current-user', // This would be the actual user ID
+			type: 'info',
+			title: 'Test Notification',
+			message: 'This is a test notification to verify your settings.',
+			priority: 'low',
+			isRead: false,
+			isArchived: false
+		});
+		toast.success('Test notification sent');
+	}
 </script>
 
-<div class="space-y-6 p-6">
-	<div>
-		<h1 class="text-2xl font-semibold tracking-tight">Notifications</h1>
-		<p class="text-sm text-muted-foreground">
-			Configure email, desktop and mobile app notifications.
+<div class="container mx-auto py-8 space-y-8">
+	<div class="space-y-2">
+		<h1 class="text-3xl font-bold">Notifications</h1>
+		<p class="text-muted-foreground">
+			Manage your notification preferences and view your recent notifications.
 		</p>
 	</div>
 
-	<div class="space-y-8">
-		<NotificationChannel />
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+		<!-- Recent Notifications -->
+		<div class="lg:col-span-2">
+			<Card>
+				<CardHeader>
+					<CardTitle>Recent Notifications</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<NotificationList showHeader={false} />
+				</CardContent>
+			</Card>
+		</div>
 
-		<NotificationSection title="General" settings={generalSettings} />
+		<!-- Notification Settings -->
+		<div class="space-y-6">
+			<NotificationChannel />
 
-		<NotificationSection title="Tasks" settings={taskSettings} />
+			<NotificationSection title="General" settings={generalSettings} />
 
-		<DoNotDisturbSection bind:scheduleEnabled bind:startTime bind:endTime bind:selectedDays />
+			<NotificationSection title="Tasks" settings={taskSettings} />
 
-		<div class="flex gap-4">
-			<Button>Save changes</Button>
-			<Button variant="outline">Cancel</Button>
+			<Card>
+				<CardHeader>
+					<CardTitle>Do Not Disturb</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<DoNotDisturbSection bind:scheduleEnabled bind:startTime bind:endTime bind:selectedDays />
+				</CardContent>
+			</Card>
+
+			<!-- Actions -->
+			<div class="flex flex-col gap-2">
+				<Button on:click={saveSettings} class="w-full">
+					<Icon icon="lucide:save" class="h-4 w-4 mr-2" />
+					Save Settings
+				</Button>
+
+				<Button variant="outline" on:click={testNotification} class="w-full">
+					<Icon icon="lucide:bell" class="h-4 w-4 mr-2" />
+					Test Notification
+				</Button>
+			</div>
 		</div>
 	</div>
 </div>

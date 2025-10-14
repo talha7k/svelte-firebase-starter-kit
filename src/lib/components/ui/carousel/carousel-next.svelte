@@ -1,5 +1,5 @@
-<script lang="ts">
-	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+ <script lang="ts">
+	import Icon from '@iconify/svelte';
 	import type { WithoutChildren } from "bits-ui";
 	import { getEmblaContext } from "./context.js";
 	import { cn } from "$lib/utils.js";
@@ -33,6 +33,6 @@
 	bind:ref
 	{...restProps}
 >
-	<ArrowRightIcon class="size-4" />
+	<Icon icon="lucide:arrow-right" class="size-4" />
 	<span class="sr-only">Next slide</span>
 </Button>

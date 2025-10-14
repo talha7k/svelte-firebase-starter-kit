@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { firekitAuth } from 'svelte-firekit';
 	import { Input } from '../ui/input/index.js';
-	import { resetPasswordSchema } from '../../schemas/reset-password.js';
+	import { resetPasswordSchema } from '../../schemas/user/reset-password';
 	import { toast } from 'svelte-sonner';
 	import * as v from 'valibot';
 	import Button from '../ui/button/button.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { firekitAuth } from 'svelte-firekit';
-	import { signInSchema } from '../../schemas/sign-in.js';
+	import { signInSchema } from '../../schemas/user/sign-in';
 	import { Input } from '../ui/input/index.js';
 	import Button from '../ui/button/button.svelte';
 	import * as v from 'valibot';
