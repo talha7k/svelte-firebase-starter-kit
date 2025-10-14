@@ -5,7 +5,6 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import DarkModeToggle from "$lib/components/shared/dark-mode-toggle.svelte";
   import { marketingNavItems, siteConfig } from "../../../../config";
-  import SocialMediaIcons from "$lib/components/shared/social-media-icons.svelte";
   import { firekitUser } from "svelte-firekit";
   import { page } from "$app/state";
   let path = $derived(page.url.pathname);
@@ -39,7 +38,7 @@
 
 <div class="fixed inset-x-0 top-0 z-10 flex h-fit flex-col">
   <header
-    class=" w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    class=" w-full border-b border-border/40 bg-muted/95 backdrop-blur supports-[backdrop-filter]:bg-muted/60"
   >
     <nav
       class="relative mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 md:flex md:items-center md:justify-between md:gap-3 lg:px-8"
@@ -132,7 +131,6 @@
                 style={indicatorStyle}
               ></div>
             {/if}
-            <SocialMediaIcons />
             <div class="hidden md:block">
               <DarkModeToggle />
             </div>
