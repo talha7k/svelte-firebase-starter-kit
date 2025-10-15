@@ -13,11 +13,11 @@
     firekitDoc,
     firekitDocMutations,
   } from "svelte-firekit";
-   import { userProfile } from "$lib/stores/user";
-   import { notificationActions } from "$lib/stores/notification";
-   import { messagingActions } from "$lib/stores/message";
-   import { isSidebarOpen } from "$lib/stores/sidebar";
-   import type { UserProfile } from "$lib/types/user";
+  import { userProfile } from "$lib/stores/user";
+  import { notificationActions } from "$lib/stores/notification";
+  import { messagingActions } from "$lib/stores/message";
+  import { isSidebarOpen } from "$lib/stores/sidebar";
+  import type { UserProfile } from "$lib/types/user";
   let { children } = $props();
   const config: any = {
     geolocation: {
@@ -89,7 +89,6 @@
       class="flex h-16 shrink-0 items-center justify-between gap-2 border-b"
     >
       <div class="flex items-center gap-2 px-3">
-        
         <AutoBreadcrumb />
       </div>
       <div class="flex items-center gap-2 px-4">

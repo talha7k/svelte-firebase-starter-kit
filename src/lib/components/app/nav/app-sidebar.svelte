@@ -21,6 +21,7 @@
 	<Sidebar.Root
 		bind:ref
 		{...restProps}
+		class="[&_[data-slot='sidebar-gap']]:group-data-[collapsible=icon]:w-0 z-50"
 	>
 	<Sidebar.Header>
 		<Sidebar.Menu>
