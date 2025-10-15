@@ -83,14 +83,13 @@
 </script>
 
 <Sidebar.Provider bind:open={$isSidebarOpen}>
-  <AppSidebar variant="inset" />
+  <AppSidebar variant="inset" collapsible="icon" />
   <Sidebar.Inset>
     <header
       class="flex h-16 shrink-0 items-center justify-between gap-2 border-b"
     >
       <div class="flex items-center gap-2 px-3">
-        <Sidebar.Trigger />
-        <Separator orientation="vertical" class="mr-2 h-4" />
+        
         <AutoBreadcrumb />
       </div>
       <div class="flex items-center gap-2 px-4">

@@ -4,14 +4,24 @@
 	import { siteConfig } from '../../../../config';
 	import NavMain from './nav-main.svelte';
 	import NavUser from './nav-user.svelte';
+
 	let {
 		ref = $bindable(null),
-		collapsible = 'icon',
 		...restProps
 	}: ComponentProps<typeof Sidebar.Root> = $props();
+
+	const sidebar = Sidebar.useSidebar();
 </script>
 
-<Sidebar.Root bind:ref {collapsible} {...restProps}>
+<div
+	class="relative"
+	onmouseenter={() => sidebar.setOpen(true)}
+	onmouseleave={() => sidebar.setOpen(false)}
+>
+	<Sidebar.Root
+		bind:ref
+		{...restProps}
+	>
 	<Sidebar.Header>
 		<Sidebar.Menu>
 			<Sidebar.MenuItem class="flex items-center">
@@ -26,7 +36,6 @@
 						</a>
 					{/snippet}
 				</Sidebar.MenuButton>
-				<Sidebar.Trigger class="group-data-[state=collapsed]:hidden" />
 			</Sidebar.MenuItem>
 		</Sidebar.Menu>
 	</Sidebar.Header>
@@ -36,5 +45,5 @@
 	<Sidebar.Footer>
 		<NavUser />
 	</Sidebar.Footer>
-	<Sidebar.Rail />
 </Sidebar.Root>
+</div>
