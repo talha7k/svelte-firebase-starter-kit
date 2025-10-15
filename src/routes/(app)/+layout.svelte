@@ -13,11 +13,12 @@
     firekitDoc,
     firekitDocMutations,
   } from "svelte-firekit";
-  import { userProfile } from "$lib/stores/user";
-  import { notificationActions } from "$lib/stores/notification";
-  import { messagingActions } from "$lib/stores/message";
-  import { isSidebarOpen } from "$lib/stores/sidebar";
-  import type { UserProfile } from "$lib/types/user";
+   import { userProfile } from "$lib/stores/user";
+   import { notificationActions } from "$lib/stores/notification";
+   import { messagingActions } from "$lib/stores/message";
+   import { isSidebarOpen } from "$lib/stores/sidebar";
+   import { validateUserState } from "$lib/utils/auth";
+   import type { UserProfile } from "$lib/types/user";
   let { children } = $props();
   const config: any = {
     geolocation: {
@@ -32,6 +33,21 @@
     if (firekitUser.initialized && !firekitUser.isAuthenticated) {
       goto("/sign-in");
     }
+
+    // Check if authenticated user has completed onboarding
+    if (firekitUser.initialized && firekitUser.isAuthenticated) {
+      const unsubscribe = userProfile.subscribe(profile => {
+        const validation = validateUserState(firekitUser.user, profile.data);
+
+        if (!validation.isValid && validation.needsOnboarding) {
+          goto("/onboarding");
+        }
+        // If user is valid, allow access to app
+        // If user is authenticated but profile is loading, allow access (will be validated by components)
+      });
+      return unsubscribe;
+    }
+
     if (firekitUser.initialized && !firekitPresence.initialized) {
       firekitPresence.initialize(firekitUser.user, config);
     }

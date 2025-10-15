@@ -28,6 +28,8 @@
 			language: 'en',
 			role: 'user',
 			permissions: [],
+			companyId: 'company1',
+			onboardingCompleted: true,
 			metadata: {
 				accountStatus: 'active'
 			}
@@ -47,6 +49,8 @@
 			language: 'en',
 			role: 'admin',
 			permissions: ['manage_users', 'manage_content'],
+			companyId: 'company1',
+			onboardingCompleted: true,
 			metadata: {
 				accountStatus: 'active'
 			}

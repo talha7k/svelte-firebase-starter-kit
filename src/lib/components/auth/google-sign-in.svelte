@@ -1,15 +1,15 @@
-<script lang="ts">
+	<script lang="ts">
 	import { firekitAuth } from 'svelte-firekit';
 	import { toast } from 'svelte-sonner';
 
 	import Button from '../ui/button/button.svelte';
-	import { goto } from '$app/navigation';
+	import { handleUserOnboarding } from '$lib/utils/auth';
 	let { label = 'Sign in with' }: { label: string } = $props();
 
 	async function signInWithGoogle() {
 		try {
 			await firekitAuth.signInWithGoogle();
-			await goto('/dashboard');
+			await handleUserOnboarding();
 		} catch (error) {
 			if (error instanceof Error) {
 				toast.error(error.message);
