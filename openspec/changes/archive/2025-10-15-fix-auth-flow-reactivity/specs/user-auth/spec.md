@@ -53,26 +53,3 @@ Then allow access only if onboardingCompleted is false
 And redirect to /dashboard if onboarding is already completed
 And redirect to /sign-in if user is not authenticated
 And handle loading states to prevent premature redirects
-
-## ADDED Requirements
-
-### Requirement: Reactive Profile Management MUST
-
-The userProfile store MUST be properly synchronized with firekitDoc reactive updates to ensure consistent state throughout the application.
-
-#### Scenario: Profile Store Reactivity
-
-Given the userProfile store and firekitDoc integration
-When firekitDoc data updates from Firestore
-Then the userProfile store MUST immediately reflect the changes
-And MUST maintain proper loading state synchronization
-And MUST handle error states appropriately
-And MUST prevent stale data issues
-
-#### Scenario: Store Initialization
-
-Given the application startup sequence
-When firekitDoc initializes for user profile data
-Then the userProfile store MUST be properly initialized with loading state
-And MUST wait for firekitDoc data before making profile available
-And MUST handle initialization failures gracefully
