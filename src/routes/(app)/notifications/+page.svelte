@@ -115,12 +115,12 @@
 
 			<!-- Actions -->
 			<div class="flex flex-col gap-2">
-				<Button on:click={saveSettings} class="w-full">
+				<Button onclick={saveSettings} class="w-full">
 					<Icon icon="lucide:save" class="h-4 w-4 mr-2" />
 					Save Settings
 				</Button>
 
-				<Button variant="outline" on:click={testNotification} class="w-full">
+				<Button variant="outline" onclick={testNotification} class="w-full">
 					<Icon icon="lucide:bell" class="h-4 w-4 mr-2" />
 					Test Notification
 				</Button>

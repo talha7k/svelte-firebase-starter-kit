@@ -93,7 +93,7 @@
 			<CardHeader>
 				<div class="flex items-center justify-between">
 					<CardTitle>Uploaded Files ({uploadedFiles.length})</CardTitle>
-					<Button variant="outline" size="sm" on:click={clearUploadedFiles}>
+					<Button variant="outline" size="sm" onclick={clearUploadedFiles}>
 						Clear All
 					</Button>
 				</div>

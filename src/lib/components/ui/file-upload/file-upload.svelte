@@ -266,7 +266,7 @@
 			<div class="flex items-center justify-between">
 				<h3 class="text-sm font-medium">Selected Files ({files.length})</h3>
 				{#if !isUploading}
-					<Button variant="outline" size="sm" on:click={clearAll}>
+					<Button variant="outline" size="sm" onclick={clearAll}>
 						<Icon icon="lucide:x" class="h-4 w-4 mr-1" />
 						Clear All
 					</Button>
@@ -319,7 +319,7 @@
 									<Button
 										variant="ghost"
 										size="sm"
-										on:click={() => removeFile(index)}
+										onclick={() => removeFile(index)}
 										class="text-destructive hover:text-destructive"
 									>
 										<Icon icon="lucide:trash-2" class="h-4 w-4" />
@@ -335,7 +335,7 @@
 		<!-- Upload Button -->
 		<div class="flex justify-end">
 			<Button
-				on:click={uploadFiles}
+				onclick={uploadFiles}
 				disabled={!canUpload}
 				class="min-w-32"
 			>
