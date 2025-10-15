@@ -231,12 +231,12 @@
 			: 'border-muted-foreground/25 hover:border-muted-foreground/50'} {disabled
 			? 'opacity-50 cursor-not-allowed'
 			: 'cursor-pointer'}"
-		on:dragover={handleDragOver}
-		on:dragleave={handleDragLeave}
-		on:drop={handleDrop}
+		ondragover={handleDragOver}
+		ondragleave={handleDragLeave}
+		ondrop={handleDrop}
 		role="button"
 		tabindex="0"
-		on:keydown={(e) => e.key === 'Enter' && !disabled && document.getElementById('file-input')?.click()}
+		onkeydown={(e) => e.key === 'Enter' && !disabled && document.getElementById('file-input')?.click()}
 	>
 		<input
 			id="file-input"
@@ -245,7 +245,7 @@
 			{multiple}
 			{disabled}
 			class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-			on:change={handleFileSelect}
+			onchange={handleFileSelect}
 		/>
 		
 		<div class="space-y-2">

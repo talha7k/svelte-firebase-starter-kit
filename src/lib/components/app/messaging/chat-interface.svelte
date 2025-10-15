@@ -141,7 +141,7 @@
 								{:else if message.type === 'image' && message.metadata?.imageUrl}
 									<img
 										src={message.metadata.imageUrl}
-										alt="Shared image"
+										alt=""
 										class="rounded max-w-full h-auto"
 									/>
 								{:else if message.type === 'file' && message.metadata?.fileName}

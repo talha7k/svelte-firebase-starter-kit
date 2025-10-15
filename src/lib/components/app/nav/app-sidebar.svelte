@@ -15,11 +15,12 @@
 	const sidebar = Sidebar.useSidebar();
 </script>
 
-<div
-	class="relative"
-	onmouseenter={() => sidebar.setOpen(true)}
-	onmouseleave={() => sidebar.setOpen(false)}
->
+	<div
+		class="relative"
+		role="none"
+		onmouseenter={() => sidebar.setOpen(true)}
+		onmouseleave={() => sidebar.setOpen(false)}
+	>
 	<Sidebar.Root
 		bind:ref
 		{...restProps}
