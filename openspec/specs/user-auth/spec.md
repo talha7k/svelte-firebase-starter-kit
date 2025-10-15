@@ -1,3 +1,7 @@
+## Purpose
+
+The user-auth capability manages user authentication, onboarding validation, and route protection to ensure secure access to application features based on user profile completion status.
+
 ## Requirements
 
 ### Requirement: Authentication Flow with Onboarding Check MUST

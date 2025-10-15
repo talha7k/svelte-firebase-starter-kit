@@ -60,49 +60,63 @@
      }
    });
 
-  $effect(() => {
-    const user = firekitUser.user;
-    if (user && user.uid) {
-      const doc = firekitDoc<UserProfile>(`users/${user.uid}`);
-      $effect(() => {
-        userProfile.set({
-          data: doc.data ?? undefined,
-          loading: doc.loading,
-          error: doc.error,
-          update: async (data: Partial<UserProfile>) => {
-            await firekitDocMutations.update(`users/${user.uid}`, data);
+   $effect(() => {
+     const user = firekitUser.user;
+     if (user && user.uid) {
+       console.log('[App Layout] Loading user profile for:', user.uid);
+       const doc = firekitDoc<UserProfile>(`users/${user.uid}`);
+       $effect(() => {
+         console.log('[App Layout] Profile update:', {
+           loading: doc.loading,
+           hasData: !!doc.data,
+           error: doc.error
+         });
 
-            // Check for displayName
-            if (
-              data.displayName &&
-              data.displayName !== (user as any).displayName
-            ) {
-              await (user as any).updateDisplayName(data.displayName);
-            }
+         userProfile.set({
+           data: doc.data ?? undefined,
+           loading: doc.loading,
+           error: doc.error,
+           update: async (data: Partial<UserProfile>) => {
+             try {
+               await firekitDocMutations.update(`users/${user.uid}`, data);
 
-            if (data.photoURL && data.photoURL !== (user as any).photoURL) {
-              await (user as any).updatePhotoURL(data.photoURL);
-            }
+               // Check for displayName
+               if (
+                 data.displayName &&
+                 data.displayName !== (user as any).displayName
+               ) {
+                 await (user as any).updateDisplayName(data.displayName);
+               }
 
-            if (data.email && data.email !== (user as any).email) {
-              await (user as any).updateEmail(data.email);
-            }
-          },
-        });
+               if (data.photoURL && data.photoURL !== (user as any).photoURL) {
+                 await (user as any).updatePhotoURL(data.photoURL);
+               }
 
-        // Initialize notifications and messaging for the user
-        notificationActions.initialize(user.uid);
-        messagingActions.initialize(user.uid);
-      });
-    } else {
-      userProfile.set({
-        data: undefined,
-        loading: false,
-        error: null,
-        update: async () => {},
-      });
-    }
-  });
+               if (data.email && data.email !== (user as any).email) {
+                 await (user as any).updateEmail(data.email);
+               }
+             } catch (error) {
+               console.error('[App Layout] Error updating profile:', error);
+               // Update the store with the error
+               userProfile.update(store => ({ ...store, error }));
+             }
+           },
+         });
+
+         // Initialize notifications and messaging for the user
+         notificationActions.initialize(user.uid);
+         messagingActions.initialize(user.uid);
+       });
+     } else {
+       console.log('[App Layout] No authenticated user, clearing profile');
+       userProfile.set({
+         data: undefined,
+         loading: false,
+         error: null,
+         update: async () => {},
+       });
+     }
+   });
 </script>
 
 <Sidebar.Provider bind:open={$isSidebarOpen}>
