@@ -1,9 +1,11 @@
 <script lang="ts">
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import type { ComponentProps } from 'svelte';
-	import { siteConfig } from '../../../../config';
-	import NavMain from './nav-main.svelte';
-	import NavUser from './nav-user.svelte';
+ 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+ 	import type { ComponentProps } from 'svelte';
+ 	import { siteConfig } from '../../../../config';
+ 	import NavMain from './nav-main.svelte';
+ 	import NavUser from './nav-user.svelte';
+ 	import { userCompany } from '$lib/stores/user';
+ 	import { Skeleton } from '$lib/components/ui/skeleton';
 
 	let {
 		ref = $bindable(null),
@@ -23,23 +25,37 @@
 		{...restProps}
 		class="[&_[data-slot='sidebar-gap']]:group-data-[collapsible=icon]:w-0 z-50"
 	>
-	<Sidebar.Header>
-		<Sidebar.Menu>
-			<Sidebar.MenuItem class="flex items-center">
-				<Sidebar.MenuButton
-					size="lg"
-					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex-grow"
-				>
-					{#snippet child({ props })}
-						<a href="/" class="cursor-pointer" {...props}>
-							<img src={siteConfig.logo} alt={siteConfig.title} class="h-6 dark:hidden" />
-							<img src={siteConfig.logoDark} alt={siteConfig.title} class="hidden h-6 dark:block" />
-						</a>
-					{/snippet}
-				</Sidebar.MenuButton>
-			</Sidebar.MenuItem>
-		</Sidebar.Menu>
-	</Sidebar.Header>
+ 	<Sidebar.Header>
+ 		<Sidebar.Menu>
+ 			<Sidebar.MenuItem class="flex items-center">
+ 				<Sidebar.MenuButton
+ 					size="lg"
+ 					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex-grow"
+ 				>
+ 					{#snippet child({ props })}
+ 						<a href="/" class="cursor-pointer" {...props}>
+ 							<img src={siteConfig.logo} alt={siteConfig.title} class="h-6 dark:hidden" />
+ 							<img src={siteConfig.logoDark} alt={siteConfig.title} class="hidden h-6 dark:block" />
+ 						</a>
+ 					{/snippet}
+ 				</Sidebar.MenuButton>
+ 			</Sidebar.MenuItem>
+ 			<!-- Company Information -->
+ 			<Sidebar.MenuItem class="px-2 py-1">
+ 				{#if $userCompany.loading}
+ 					<Skeleton class="h-4 w-20" />
+ 				{:else if $userCompany.data}
+ 					<div class="text-xs font-medium text-sidebar-foreground/70 truncate">
+ 						{$userCompany.data.name}
+ 					</div>
+ 				{:else}
+ 					<div class="text-xs text-sidebar-foreground/50">
+ 						No company
+ 					</div>
+ 				{/if}
+ 			</Sidebar.MenuItem>
+ 		</Sidebar.Menu>
+ 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavMain />
 	</Sidebar.Content>

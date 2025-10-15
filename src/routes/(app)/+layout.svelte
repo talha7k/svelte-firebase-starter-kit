@@ -13,13 +13,17 @@
     firekitDoc,
     firekitDocMutations,
   } from "svelte-firekit";
-   import { userProfile } from "$lib/stores/user";
-   import { notificationActions } from "$lib/stores/notification";
-   import { messagingActions } from "$lib/stores/message";
-   import { isSidebarOpen } from "$lib/stores/sidebar";
-   import { validateUserState } from "$lib/utils/auth";
-   import type { UserProfile } from "$lib/types/user";
-  let { children } = $props();
+   import { userProfile, profileValidation } from "$lib/stores/user";
+    import { notificationActions } from "$lib/stores/notification";
+    import { messagingActions } from "$lib/stores/message";
+    import { isSidebarOpen } from "$lib/stores/sidebar";
+    import { validateUserState } from "$lib/utils/auth";
+    import { Spinner } from "$lib/components/ui/spinner";
+    import type { UserProfile } from "$lib/types/user";
+   let { children } = $props();
+
+   // Reactive variable for validation status
+   let isValidatingProfile = $derived($profileValidation.isLoading && firekitUser.isAuthenticated);
   const config: any = {
     geolocation: {
       enabled: true,
@@ -29,29 +33,32 @@
     sessionTTL: 30 * 60 * 1000, // 30 minutes
     updateInterval: 60 * 1000, // 1 minute
   };
-  $effect(() => {
-    if (firekitUser.initialized && !firekitUser.isAuthenticated) {
-      goto("/sign-in");
-    }
+   $effect(() => {
+     if (firekitUser.initialized && !firekitUser.isAuthenticated) {
+       goto("/sign-in");
+     }
 
-    // Check if authenticated user has completed onboarding
-    if (firekitUser.initialized && firekitUser.isAuthenticated) {
-      const unsubscribe = userProfile.subscribe(profile => {
-        const validation = validateUserState(firekitUser.user, profile.data);
+     // Check if authenticated user has complete profile
+     if (firekitUser.initialized && firekitUser.isAuthenticated) {
+       const unsubscribe = profileValidation.subscribe(validation => {
+         // If profile is still loading, don't redirect yet
+         if (validation.isLoading) return;
 
-        if (!validation.isValid && validation.needsOnboarding) {
-          goto("/onboarding");
-        }
-        // If user is valid, allow access to app
-        // If user is authenticated but profile is loading, allow access (will be validated by components)
-      });
-      return unsubscribe;
-    }
+         // If profile validation fails or profile is incomplete, redirect to onboarding
+         if (!validation.isComplete) {
+           goto("/onboarding");
+           return;
+         }
 
-    if (firekitUser.initialized && !firekitPresence.initialized) {
-      firekitPresence.initialize(firekitUser.user, config);
-    }
-  });
+         // Profile is complete, allow access to app
+         // Initialize presence tracking only after profile validation
+         if (!firekitPresence.initialized) {
+           firekitPresence.initialize(firekitUser.user, config);
+         }
+       });
+       return unsubscribe;
+     }
+   });
 
   $effect(() => {
     const user = firekitUser.user;
@@ -118,3 +125,12 @@
     </div>
   </Sidebar.Inset>
 </Sidebar.Provider>
+
+{#if isValidatingProfile}
+  <div class="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="flex flex-col items-center gap-4">
+      <Spinner class="h-8 w-8" />
+      <p class="text-sm text-muted-foreground">Validating profile...</p>
+    </div>
+  </div>
+{/if}

@@ -5,17 +5,29 @@ author: "Talha Khan"
 tags: ["svelte", "firebase", "typescript", "blog", "starter-template"]
 excerpt: "Discover how Svelte Firekit combines SvelteKit, Firebase, and TypeScript to create a powerful, blog-enabled starter template for modern web applications."
 categories: ["Product"]
-featuredImage: {
-  url: "https://placehold.co/1200x630",
-  alt: "Svelte Firekit Template Overview",
-  caption: "A modern SvelteKit starter template with Firebase integration"
-}
-seo: {
-  title: "Svelte Firekit - Modern SvelteKit & Firebase Starter Template",
-  description: "A production-ready starter template combining SvelteKit, Firebase, and TypeScript with built-in blog functionality and modern development features.",
-  keywords: ["sveltekit", "firebase", "typescript", "blog", "template", "starter", "shadcn", "svelte5"],
-  ogImage: "https://placehold.co/1200x630"
-}
+featuredImage:
+  {
+    url: "https://placehold.co/1200x630",
+    alt: "Svelte Firekit Template Overview",
+    caption: "A modern SvelteKit starter template with Firebase integration",
+  }
+seo:
+  {
+    title: "Svelte Firekit - Modern SvelteKit & Firebase Starter Template",
+    description: "A production-ready starter template combining SvelteKit, Firebase, and TypeScript with built-in blog functionality and modern development features.",
+    keywords:
+      [
+        "sveltekit",
+        "firebase",
+        "typescript",
+        "blog",
+        "template",
+        "starter",
+        "shadcn",
+        "svelte5",
+      ],
+    ogImage: "https://placehold.co/1200x630",
+  }
 published: true
 ---
 
@@ -29,12 +41,12 @@ At the heart of Svelte Firekit is a robust blogging system designed with content
 
 ```typescript
 interface Post {
-    slug: string;
-    title: string;
-    publishedAt: Date;
-    content: any;
-    frontmatter: PostFrontmatter;
-    published: boolean;
+  slug: string;
+  title: string;
+  publishedAt: Date;
+  content: any;
+  frontmatter: PostFrontmatter;
+  published: boolean;
 }
 ```
 
@@ -54,13 +66,14 @@ The template includes a robust state management system for blog posts:
 
 ```typescript
 interface PostState {
-    posts: Map<string, Post>;
-    isLoaded: boolean;
-    error: Error | null;
+  posts: Map<string, Post>;
+  isLoaded: boolean;
+  error: Error | null;
 }
 ```
 
 This structure ensures:
+
 - Efficient post lookup using Map data structure
 - Loading state handling for better UX
 - Proper error handling and display
@@ -68,23 +81,27 @@ This structure ensures:
 ## Key Features
 
 ### 1. Firebase Integration
+
 - Pre-configured Firebase setup
 - Authentication ready to go
 - Firestore integration for data storage
 - Firebase Storage for media files
 
 ### 2. TypeScript-First
+
 - Comprehensive type definitions
 - Type-safe blog post handling
 - Improved developer experience with autocomplete
 
 ### 3. Modern Development
+
 - Built on SvelteKit for optimal performance
 - ShadcnUI components for beautiful UI
 - Markdown support for blog posts
 - SEO optimization out of the box
 
 ### 4. Developer Experience
+
 - Hot module replacement
 - Fast refresh during development
 - Intuitive folder structure
